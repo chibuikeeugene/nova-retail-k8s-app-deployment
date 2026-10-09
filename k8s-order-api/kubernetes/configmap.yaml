@@ -5,4 +5,4 @@ metadata:
   namespace: nova-retail
 data:
   APP_ENV: production
-  APP_VERSION: 1.0.0
+  APP_VERSION: 2.0.0
