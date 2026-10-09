@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: order-api
-        image: order-api:v1.0.0
+        image: order-api:v2.0.0
         resources:
           requests:
             memory: "64Mi"

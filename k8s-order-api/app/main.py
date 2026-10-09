@@ -7,7 +7,7 @@ app = FastAPI()
 
 # load environment variables
 APP_ENV = os.getenv("APP_ENV", "dev")
-APP_VERSION = os.getenv("APP_VERSION", "v1.0.0")
+APP_VERSION = os.getenv("APP_VERSION", "2.0.0")
 
 #TODO 1: create status endpoint
 @app.get("/")
