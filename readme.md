@@ -2,6 +2,8 @@
 
 ## Business Problem
 
+# Milestone 1
+
 * NovaRetail currently manually run their application(customer order api) as a container on a VM. This creates operational problems such as:
   * A crashed container requires manual intervention.
   * Deployments cause downtime.
@@ -16,36 +18,7 @@
 
 ## Architecture
 
-                User / Tester
-                         |
-                         |
-                  localhost:8080
-                         |
-                         v
-                +----------------+
-                |    Service            |
-                | order-service     |
-                |   ClusterIP          |
-                +-------+--------+
-                        |
-                  label selector
-                  app: order-api
-                        |
-            +-----------+-----------+
-            |                                        |
-            v                                       v
-     +-------------+         +-------------+
-     |    Pod 1          |              |    Pod 2     |
-     |  order-api     |               |  order-api  |
-     +-------------+         +-------------+
-            \                                      /
-             \                                   /
-              +-------------------+
-                       |
-                 Deployment
-                 replicas: 2
-                       |
-                ConfigMap/Secret
+[docs](./docs/)
 
 ## Technologies
 
@@ -67,7 +40,7 @@
 
 ## Delivery:
 
-Built a containerized API and deployed it to a multi-node Kubernetes environment; managed configuration with ConfigMaps and Secrets; exposed workloads through Kubernetes Services; configured resource requests/limits and health probes; observed Kubernetes reconciliation and self-healing; performed rolling application updates; diagnosed a failed deployment; and restored service using Deployment rollback.
+* Built a containerized API and deployed it to a multi-node Kubernetes environment; managed configuration with ConfigMaps and Secrets; exposed workloads through Kubernetes Services; configured resource requests/limits and health probes; observed Kubernetes reconciliation and self-healing; performed rolling application updates; diagnosed a failed deployment; and restored service using Deployment rollback.
 
 ## Application Deployment
 
@@ -77,20 +50,25 @@ Built a containerized API and deployed it to a multi-node Kubernetes environment
 
 ![Architecture Diagram](screenshots/service.png)
 
-## Health Checks
+## Service endpointslices
 
-![Architecture Diagram](images/architecture.png)
-
-## Resource Management
-
-![Architecture Diagram](images/architecture.png)
+![Architecture Diagram](screenshots/endpointslices.png)
 
 ## Rolling Update Test
 
-![Architecture Diagram](images/architecture.png)
-
-## Rollback Test
-
-![Architecture Diagram](images/architecture.png)
+![Architecture Diagram](screenshots/rollout-status.png)
 
 ## Troubleshooting
+
+![Architecture Diagram](screenshots/troubleshooting.png)
+
+
+# Milestone 2:
+
+* Users should access the application through an HTTP endpoint.
+* Some application data needs persistent storage.
+* The application should automatically scale when demand increases.
+* Containers should operate with safer security settings.
+* Engineers need better operational visibility.
+* The application should survive common infrastructure failures.
+* Workloads should be distributed across worker nodes where possible.
