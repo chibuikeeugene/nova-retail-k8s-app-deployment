@@ -25,6 +25,9 @@ spec:
             cpu: "250m"
         ports:
         - containerPort: 8000
+        volumeMounts:
+          - name: pvc-volume
+            mountPath: /data
         envFrom:
         - configMapRef:
             name: order-api-config
@@ -38,3 +41,7 @@ spec:
           httpGet:
             path: /health
             port: 8000
+      volumes:
+        - name: pvc-volume
+          persistentVolumeClaim:
+            claimName: order-data-pvc
