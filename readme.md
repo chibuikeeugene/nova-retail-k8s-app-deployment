@@ -62,7 +62,6 @@
 
 ![Architecture Diagram](screenshots/troubleshooting.png)
 
-
 # Milestone 2:
 
 * Users should access the application through an HTTP endpoint.
@@ -72,3 +71,12 @@
 * Engineers need better operational visibility.
 * The application should survive common infrastructure failures.
 * Workloads should be distributed across worker nodes where possible.
+
+
+## Storage Architecture Limitation
+
+This deployment uses multiple API replicas (`replicas: 2`) together with a `ReadWriteOnce` PVC.
+
+`ReadWriteOnce` storage is generally intended to be mounted read/write by workloads on a single node, so multiple replicas scheduled across different nodes should not rely on the same PVC for shared application data.
+
+For a production Order API, the application should remain stateless and store persistent business data in an external database or shared storage service instead of depending on a single RWO filesystem shared between replicas.
