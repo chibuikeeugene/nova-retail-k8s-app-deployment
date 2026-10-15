@@ -1,8 +1,8 @@
 # Kubernetes Order API Platform
 
-## Business Problem
+## Business Overview
 
-# Milestone 1
+# Situation 1
 
 * NovaRetail currently manually run their application(customer order api) as a container on a VM. This creates operational problems such as:
   * A crashed container requires manual intervention.
@@ -18,7 +18,7 @@
 
 ## Architecture
 
-[docs](./docs/)
+[docs](docs/)
 
 ## Technologies
 
@@ -62,7 +62,7 @@
 
 ![Architecture Diagram](screenshots/troubleshooting.png)
 
-# Milestone 2:
+# Situation 2:
 
 * Users should access the application through an HTTP endpoint.
 * Some application data needs persistent storage.
@@ -72,7 +72,6 @@
 * The application should survive common infrastructure failures.
 * Workloads should be distributed across worker nodes where possible.
 
-
 ## Storage Architecture Limitation
 
 This deployment uses multiple API replicas (`replicas: 2`) together with a `ReadWriteOnce` PVC.
@@ -80,3 +79,18 @@ This deployment uses multiple API replicas (`replicas: 2`) together with a `Read
 `ReadWriteOnce` storage is generally intended to be mounted read/write by workloads on a single node, so multiple replicas scheduled across different nodes should not rely on the same PVC for shared application data.
 
 For a production Order API, the application should remain stateless and store persistent business data in an external database or shared storage service instead of depending on a single RWO filesystem shared between replicas.
+
+## Metrics server
+
+![Architecture diagra](screenshots/metric-server-and-hpa.png)
+
+## Application scaling with HPA
+
+![screenshots](screenshots/hpa-autoscaling.png)
+
+
+
+![Screenshot](screenshots/hpa-pod-provisioning.png)
+
+
+![Screenshot](screenshots/hpa-top-pods.png)
