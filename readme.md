@@ -18,7 +18,7 @@
 
 ## Architecture
 
-[docs](docs/)
+[Architecture docs progression](k8s-order-api/docs)
 
 ## Technologies
 
@@ -68,7 +68,6 @@
 * Some application data needs persistent storage.
 * The application should automatically scale when demand increases.
 * Containers should operate with safer security settings.
-* Engineers need better operational visibility.
 * The application should survive common infrastructure failures.
 * Workloads should be distributed across worker nodes where possible.
 
@@ -86,6 +85,8 @@ For a production Order API, the application should remain stateless and store pe
 
 ## Application scaling with HPA
 
+Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two baseline replicas while allowing the Order API to scale to six replicas during increased demand.
+
 ![screenshots](screenshots/hpa-autoscaling.png)
 
 
@@ -94,3 +95,24 @@ For a production Order API, the application should remain stateless and store pe
 
 
 ![Screenshot](screenshots/hpa-top-pods.png)
+
+
+## Intentional Pods scheduling outcome
+
+### Without Pod Anti-affinity
+
+![pods without scheduling](screenshots/pods-without-scheduling.png)
+
+### With Pod Anti-affinity - 
+
+![pod anti-affinity](screenshots/pod-anti-affinity.png)
+
+* NB: Change in pod identity is as a result of the fact that we are dealing with stateless workload - in this case deployment workload
+
+### Investigating while pod 'order-api-5896946cb8-4whlf' - still had a 'pending' status
+
+![tainted-node](screenshots/noschedule-tainted-nodes.png)
+
+## Tainted nodes -  to ensure only designated pods are permissible
+
+![tainted node](screenshots/tainted-node.png)
