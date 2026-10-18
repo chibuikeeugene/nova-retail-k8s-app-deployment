@@ -13,9 +13,33 @@ spec:
       labels:
         app: order-api
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values: 
+                      - order-api
+              topologyKey: kubernetes.io/hostname
+      tolerations: # added toleration to enable scheduling to tainted nodes
+        - key: workload
+          operator: Equal
+          value: ml
+          effect: NoSchedule
+      securityContext: # enhancing pod's processes with group based access 
+        fsGroup: 2000
       containers:
       - name: order-api
         image: order-api:v2.0.0
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1500
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
         resources:
           requests:
             memory: "64Mi"
@@ -43,5 +67,6 @@ spec:
             port: 8000
       volumes:
         - name: pvc-volume
-          persistentVolumeClaim:
-            claimName: order-data-pvc
+          emptyDir: {} # pod only volumes. data gets lost if pod is terminated and restarted
+          # persistentVolumeClaim: # alternate option for persistent data storage with pvc
+          #   claimName: order-data-pvc
