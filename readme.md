@@ -2,7 +2,7 @@
 
 ## Business Overview
 
-# Situation 1
+# Business case 1
 
 * NovaRetail currently manually run their application(customer order api) as a container on a VM. This creates operational problems such as:
   * A crashed container requires manual intervention.
@@ -62,7 +62,7 @@
 
 ![Architecture Diagram](screenshots/troubleshooting.png)
 
-# Situation 2:
+# Business case 2:
 
 * Users should access the application through an HTTP endpoint.
 * Some application data needs persistent storage.
@@ -105,6 +105,8 @@ Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two ba
 
 ### With Pod Anti-affinity - 
 
+* Introduced Pod distribution preferences across Kubernetes worker nodes and simulated node maintenance using cordon and drain operations to validate workload rescheduling.
+
 ![pod anti-affinity](screenshots/pod-anti-affinity.png)
 
 * NB: Change in pod identity is as a result of the fact that we are dealing with stateless workload - in this case deployment workload
@@ -116,3 +118,31 @@ Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two ba
 ## Tainted nodes -  to ensure only designated pods are permissible
 
 ![tainted node](screenshots/tainted-node.png)
+
+## To improve container runtime safety and compliance - I added security context
+
+![security context](screenshots/security-context.png)
+
+
+## Business case 3
+
+* Transform the existing Kubernetes Order API into a secure, maintainable, multi-environment platform using Helm, Kustomize, RBAC, NetworkPolicies, Pod Disruption Budgets, TLS, and controlled deployment strategies.
+
+
+## Architecture
+
+![architecture release 3](k8s-order-api/docs/architecture-release-v3.png)
+
+### Exiting resource and environment
+
+* Existing multi-node kind cluster, Docker, kubectl, Helm, Python/FastAPI
+
+### Expectations:
+
+* Configuration drift: Development and production configurations are being maintained manually.
+* Deployment inconsistency: Engineers apply multiple YAML manifests individually.
+* Excessive permissions: Application identities and developer access have not been explicitly restricted.
+* Unrestricted networking: Workloads can potentially communicate with services they do not need.
+* Availability risks: Routine maintenance could disrupt too many replicas.
+* Release risks: Application changes require a repeatable, controlled deployment process.
+* Transport security: External application traffic requires HTTPS.
