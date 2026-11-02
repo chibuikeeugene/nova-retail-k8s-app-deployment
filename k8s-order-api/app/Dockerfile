@@ -40,7 +40,7 @@ HEALTHCHECK \
 --timeout=30s \
 --start-period=5s \
 --retries=3 \
-CMD python -c "import urllib.request; urllib.request.urlopen('http://0.0.0.0:8001/health', timeout=30)"
+CMD python -c "import urllib.request; urllib.request.urlopen('http://0.0.0.0:8000/health', timeout=30)"
 
 # run final application commnands
 CMD [ "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000" ]

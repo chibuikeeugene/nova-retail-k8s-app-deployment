@@ -1,0 +1,104 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+
+name: nova-retail-lab
+
+networking:
+  # Expose the Kubernetes API only on your Mac.
+  apiServerAddress: "127.0.0.1"
+
+  # Automatically allocate an available API port.
+  apiServerPort: 0
+
+  ipFamily: ipv4
+
+  # Change these if they overlap with your VPN or local networks.
+  podSubnet: "10.244.0.0/16"
+  serviceSubnet: "10.96.0.0/16"
+
+  # Keep kind's default networking.
+  disableDefaultCNI: false
+  kubeProxyMode: "iptables"
+
+nodes:
+  - role: control-plane
+    labels:
+      lab-role: control-plane
+
+  - role: worker
+    labels:
+      lab-role: applications
+      ingress-ready: "true"
+      storage-ready: "true"
+
+    # These mappings target THIS worker.
+    extraPortMappings:
+      # For an ingress controller listening on node ports 80/443.
+      - containerPort: 80
+        hostPort: 8080
+        listenAddress: "127.0.0.1"
+        protocol: TCP
+
+      - containerPort: 443
+        hostPort: 8443
+        listenAddress: "127.0.0.1"
+        protocol: TCP
+
+      # For a Service configured with nodePort: 30080.
+      - containerPort: 30080
+        hostPort: 8000
+        listenAddress: "127.0.0.1"
+        protocol: TCP
+
+    extraMounts:
+      - hostPath: /Users/chibuikeiwuchukwu/kind-data/shared
+        containerPath: /mnt/shared
+        readOnly: false
+
+  - role: worker
+    labels:
+      lab-role: applications
+      storage-ready: "true"
+      ingress-ready: "true"
+
+    # These mappings target THIS worker.
+    extraPortMappings:
+      # For an ingress controller listening on node ports 80/443.
+      - containerPort: 80
+        hostPort: 8081
+        listenAddress: "127.0.0.1"
+        protocol: TCP
+
+      - containerPort: 443
+        hostPort: 8441
+        listenAddress: "127.0.0.1"
+        protocol: TCP
+
+    extraMounts:
+      - hostPath: /Users/chibuikeiwuchukwu/kind-data/shared
+        containerPath: /mnt/shared
+        readOnly: false
+
+  - role: worker
+    labels:
+      lab-role: applications
+      storage-ready: "true"
+      ingress-ready: "true"
+
+    # These mappings target THIS worker.
+    extraPortMappings:
+      # For an ingress controller listening on node ports 80/443.
+      - containerPort: 80
+        hostPort: 8082
+        listenAddress: "127.0.0.1"
+        protocol: TCP
+
+      - containerPort: 443
+        hostPort: 8442
+        listenAddress: "127.0.0.1"
+        protocol: TCP
+
+    extraMounts:
+      - hostPath: /Users/chibuikeiwuchukwu/kind-data/shared
+        containerPath: /mnt/shared
+        readOnly: false

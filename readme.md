@@ -71,7 +71,11 @@
 * The application should survive common infrastructure failures.
 * Workloads should be distributed across worker nodes where possible.
 
-## Storage Architecture Limitation
+## Architecture
+
+![k8s-app-deploy-flow-arch-v2](k8s-order-api/docs/k8s-app-deploy-flow-arch-v2.png)
+
+## Persistence Volume Consideration
 
 This deployment uses multiple API replicas (`replicas: 2`) together with a `ReadWriteOnce` PVC.
 
@@ -89,13 +93,9 @@ Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two ba
 
 ![screenshots](screenshots/hpa-autoscaling.png)
 
-
-
 ![Screenshot](screenshots/hpa-pod-provisioning.png)
 
-
 ![Screenshot](screenshots/hpa-top-pods.png)
-
 
 ## Intentional Pods scheduling outcome
 
@@ -103,7 +103,7 @@ Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two ba
 
 ![pods without scheduling](screenshots/pods-without-scheduling.png)
 
-### With Pod Anti-affinity - 
+### With Pod Anti-affinity -
 
 * Introduced Pod distribution preferences across Kubernetes worker nodes and simulated node maintenance using cordon and drain operations to validate workload rescheduling.
 
@@ -123,15 +123,13 @@ Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two ba
 
 ![security context](screenshots/security-context.png)
 
-
 ## Business case 3
 
 * Transform the existing Kubernetes Order API into a secure, maintainable, multi-environment platform using Helm, Kustomize, RBAC, NetworkPolicies, Pod Disruption Budgets, TLS, and controlled deployment strategies.
 
-
 ## Architecture
 
-![architecture release 3](k8s-order-api/docs/architecture-release-v3.png)
+![architecture release 3](k8s-order-api/docs/release-mgmt-security-arch-v3.png)
 
 ### Exiting resource and environment
 
