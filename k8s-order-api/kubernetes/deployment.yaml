@@ -32,7 +32,7 @@ spec:
         fsGroup: 2000
       containers:
       - name: order-api
-        image: order-api:v2.0.0
+        image: order-api:v2.0.1
         securityContext:
           runAsNonRoot: true
           runAsUser: 1500
