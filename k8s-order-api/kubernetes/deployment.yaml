@@ -67,6 +67,5 @@ spec:
             port: 8000
       volumes:
         - name: pvc-volume
-          emptyDir: {} # pod only volumes. data gets lost if pod is terminated and restarted
-          # persistentVolumeClaim: # alternate option for persistent data storage with pvc
-          #   claimName: order-data-pvc
+          persistentVolumeClaim:
+            claimName: order-shared-pvc
