@@ -144,3 +144,5 @@ Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two ba
 * Availability risks: Routine maintenance could disrupt too many replicas.
 * Release risks: Application changes require a repeatable, controlled deployment process.
 * Transport security: External application traffic requires HTTPS.
+
+### Environment management using Kustomize
