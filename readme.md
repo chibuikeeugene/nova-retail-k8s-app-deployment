@@ -146,3 +146,11 @@ Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two ba
 * Transport security: External application traffic requires HTTPS.
 
 ### Environment management using Kustomize
+
+#Staging
+
+![kustomize staging env](screenshots/kustomize-staging.png)
+
+#prod
+
+![kustomize-prod](screenshots/kustomize-prod.png)
