@@ -18,6 +18,8 @@
 
 ## Architecture
 
+![basic k8s architecture for Nova retail](k8s-order-api/docs/k8s-arch-v1.png)
+
 [Architecture docs progression](k8s-order-api/docs)
 
 ## Technologies
@@ -73,7 +75,7 @@
 
 ## Architecture
 
-![k8s-app-deploy-flow-arch-v2](k8s-order-api/docs/k8s-app-deploy-flow-arch-v2.png)
+![k8s-app-deploy-flow-arch-v2](k8s-order-api/docs/K8s-app-deploy-flow-arch-v2.png)
 
 ## Persistence Volume Consideration
 
@@ -135,7 +137,7 @@ Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two ba
 
 * Existing multi-node kind cluster, Docker, kubectl, Helm, Python/FastAPI
 
-### Expectations:
+### Business painpoints:
 
 * Configuration drift: Development and production configurations are being maintained manually.
 * Deployment inconsistency: Engineers apply multiple YAML manifests individually.
@@ -144,6 +146,8 @@ Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two ba
 * Availability risks: Routine maintenance could disrupt too many replicas.
 * Release risks: Application changes require a repeatable, controlled deployment process.
 * Transport security: External application traffic requires HTTPS.
+
+## Specific implementations:
 
 ### Environment management using Kustomize
 
@@ -154,3 +158,7 @@ Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two ba
 #prod
 
 ![kustomize-prod](screenshots/kustomize-prod.png)
+
+### Application packaging with Helm
+
+* Ensuring application deployment is repeatable using versioned releases.
