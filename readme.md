@@ -162,3 +162,7 @@ Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two ba
 ### Application packaging with Helm
 
 * Ensuring application deployment is repeatable using versioned releases.
+
+### Helm order-api release status output report
+
+![Helm install output for the order-api chart](screenshots/helm-install-status-output.png)
