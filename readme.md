@@ -149,7 +149,7 @@ Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two ba
 
 ## Specific implementations:
 
-### Environment management using Kustomize
+### Environment management using Kustomize - can help reduce configuration drift and deployment inconsistency
 
 #Staging
 
@@ -162,3 +162,11 @@ Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two ba
 ### Application packaging with Helm
 
 * Ensuring application deployment is repeatable using versioned releases.
+
+### Helm order-api release status output report
+
+![Helm install output for the order-api chart](screenshots/helm-install-status-output.png)
+
+### Identity and authorization check result - after implementing role, role-binding and sa.
+
+![authorization output](screenshots/authorization-output.png)

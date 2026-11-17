@@ -36,6 +36,7 @@ Common labels
 {{- define "order-api.labels" -}}
 helm.sh/chart: {{ include "order-api.chart" . }}
 {{ include "order-api.selectorLabels" . }}
+app: order-api
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}

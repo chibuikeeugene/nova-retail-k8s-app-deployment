@@ -13,6 +13,8 @@ spec:
       labels:
         app: order-api
     spec:
+      serviceAccountName: order-api-sa
+      automountServiceAccountToken: false
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
