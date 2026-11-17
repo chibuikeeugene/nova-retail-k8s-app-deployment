@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods
+  namespace: nova-retail
+subjects:
+  - kind: ServiceAccount
+    name: operations-reader
+    namespace: nova-retail
+  - kind: ServiceAccount
+    name: order-api-sa
+    namespace: nova-retail
+roleRef:
+  kind: Role
+  name: pod-reader
+  apiGroup: rbac.authorization.k8s.io
