@@ -9,3 +9,15 @@ spec:
       app: order-api
   policyTypes:
     - Ingress
+  
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: nova-retail
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: traefik
+      ports:
+        - protocol: TCP
+          port: 8000
