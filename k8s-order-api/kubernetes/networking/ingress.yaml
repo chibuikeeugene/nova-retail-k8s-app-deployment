@@ -8,6 +8,10 @@ metadata:
 spec:
   # ingressClassName: nginx
   ingressClassName: traefik
+  tls:
+    - hosts:
+        - order.localhost
+      secretName: order-api-tls
   rules:
   - host: order.localhost
     http:
