@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: order-api-pdb
+  namespace: nova-prod
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: order-api

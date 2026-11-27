@@ -170,3 +170,32 @@ Implemented Horizontal Pod Autoscaling using CPU utilization, maintaining two ba
 ### Identity and authorization check result - after implementing role, role-binding and sa.
 
 ![authorization output](screenshots/authorization-output.png)
+
+### Network restriction check(ingress) via network-policy - tested output
+
+![Network policy test check](/screenshots/network-policy-check.png)
+
+
+### Pod availability risks handling using PodDisruptionBudget
+
+* To ensure routine maintenance doesn't result to significant downtime or unavailabilty of replica, thereby creating availability issues. I added a PDB resource to ensure that at least there is a minimum available number of pods running during maintenance.
+
+```YAML
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: order-api-pdb
+  namespace: nova-prod
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: order-api
+```
+
+
+### Transport security implementation via TLS
+
+* Implemented encrypted communication between external clients and the Ingress controller:
+  * created a local certificate
+  * added tls property to my ingress config spec
